@@ -2,11 +2,12 @@
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using ShopApi.Models;
 using ShopApi.Settings;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Infrastructure.Models;
+using ShopApi.Constants;
 
 namespace ShopApi.Services
 {
@@ -34,7 +35,10 @@ namespace ShopApi.Services
             var roles = await _userManager.GetRolesAsync(user);
             List<Claim> claims = new List<Claim>()
             {
-                new Claim("name", user.UserName)
+                new Claim("name", user.FirstName),
+                new Claim("surname", user.LastName),
+                new Claim("username", user.UserName),
+                new Claim("email", user.Email),
             };
 
             foreach (var role in roles)
@@ -55,7 +59,7 @@ namespace ShopApi.Services
 
         public async Task<GoogleJsonWebSignature.Payload> VerifyGoogleToken(ExternalLoginRequest request)
         {
-            string clientID= _configuration["Authentication:Google:ClientId"];
+            string clientID= _configuration["GoogleAuthSettings:ClientId"];
             var settings = new GoogleJsonWebSignature.ValidationSettings()
             {
                 Audience = new List<string>() { clientID }

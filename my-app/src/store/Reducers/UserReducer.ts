@@ -1,20 +1,20 @@
-import { CommonActionTypes } from './../../types/types';
-import { IUserState, UserActionTypes } from '../../types/types';
+import { IUserState, CommonActionTypes, UserActionTypes } from '../../types/types';
+
 
 
 const initialState: IUserState = {
-    UserName: '',
-    Email: '',
-    FirstName: '',
-    LastName: ''
+    user: null,
+    loading: false,
+    isAuth: false,
+    message: ''
 };
 
 export const userReducer = (state = initialState, action: any): IUserState => {
     switch (action.type) {
-        case CommonActionTypes.ERROR_MSG: {
+        case CommonActionTypes.START_REQUEST: {
             return {
                 ...state,
-                ...action.payload
+                loading: true
             }
         }
         case UserActionTypes.GOOGLE_LOGIN: {
@@ -23,6 +23,23 @@ export const userReducer = (state = initialState, action: any): IUserState => {
                 ...action.payload
             }
         }
+        case UserActionTypes.LOGIN_USER_SUCCESS:
+            return {
+                ...state,
+                isAuth: true,
+                loading: false,
+                user: action.payload.decodedToken,
+                message: action.payload.message,
+
+            };
+        case UserActionTypes.REGISTER_USER:
+            return {
+                ...state,
+
+                loading: false,
+                message: action.payload.message,
+
+            };
         default:
             return state;
     }

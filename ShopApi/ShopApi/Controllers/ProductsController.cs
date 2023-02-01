@@ -1,14 +1,43 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Infrastructure.Interfaces;
+using Infrastructure.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ShopApi.Models;
 
 namespace ShopApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
-    {
+    { private readonly IProductService _productService;
 
+        public ProductsController(IProductService productService)
+        {
+            _productService = productService;
+        }
+        [HttpPost("GetPosts")]
+       
+        public async Task<IActionResult> GetProductsAsync([FromBody] GetProductsVM model)
+        {
+            var res = await _productService.GetProductsAsync(model);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+
+            return BadRequest(res);
+        }
+        [HttpGet("GetPost")]
+       
+        public async Task<IActionResult> GetPostAsync( string name)
+        {
+            var res = await _productService.get(name);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+
+            return BadRequest(res);
+        }
         [HttpPost]
         [Route("UploadImage")]
         public async Task<IActionResult> UploadImage([FromForm] ProductUploadImageViewModel model)

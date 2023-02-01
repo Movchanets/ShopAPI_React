@@ -1,39 +1,38 @@
 // import { useGoogleLogin } from '@react-oauth/google';
-import { useEffect, useState } from "react";
 import "./App.css";
-import { IAuthProvider } from './types/types';
-import { GoogleExternalLoginAsync } from './axios/UserController';
+
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './components/Home/page';
+import Login from './components/Home/Login';
+import Register from './components/Home/Register';
+import Product from './components/Shop/Product';
+import Shop from './components/Shop';
 
 
 
 const App = () => {
 
-  const handleLoginSuccess = (res: any) => {
-    console.log("Login google result", res);
-    const { credential } = res;
-    console.log("Token Id", credential);
-    GoogleExternalLoginAsync(credential, 'Google')
-  }
-    ;
 
-  useEffect(() => {
-    const clientId =
-      "1009097235289-i5b2slokukn2qi1thsphkrqvj9d487r4.apps.googleusercontent.com";
-    window.google.accounts!.id.initialize({
-      client_id: clientId,
-      callback: handleLoginSuccess,
-    });
 
-    window.google.accounts!.id.renderButton(document.getElementById("loginGoogleBtn"),
-      { theme: "outline", size: "Large" });
-
-  }, []);
 
   return (
-    <>
-      <h1>Login google</h1>
-      <div id="loginGoogleBtn"></div>
-    </>
+
+    <Routes>
+      <Route path="/" element={<HomePage />} >
+        <Route index element={<Login />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/:title" element={<Product />} />
+        <Route path="/Shop" element={<Shop />} />
+      </Route>
+    </Routes>
+
+
+
+
+
+
+
   );
 };
 

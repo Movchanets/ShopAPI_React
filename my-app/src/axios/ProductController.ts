@@ -1,5 +1,4 @@
 import axios from "axios";
-import { IAuthProvider } from '../types/types';
 
 const instance = axios.create({
 	baseURL: "http://localhost:5034/api/Products",
@@ -22,5 +21,5 @@ const requests = {
 };
 
 const Products = {
-
+	getPosts: (getModel: any) => requests.post(`/GetPosts`, getModel),
 }

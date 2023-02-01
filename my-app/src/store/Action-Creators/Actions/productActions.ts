@@ -1,9 +1,10 @@
-import { UserActions } from '../../../types/types';
+import { ProductActions } from './../../../types/types';
+
 import { Dispatch } from "redux";
 
 
 
-export const GetProductList = () => async (dispatch: Dispatch<UserActions>) => {
+export const GetProductList = () => async (dispatch: Dispatch<ProductActions>) => {
 	try {
 
 	} catch (error) {

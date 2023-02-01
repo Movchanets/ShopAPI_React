@@ -1,6 +1,15 @@
-﻿namespace DAL.Interfaces;
+﻿using DAL.Entities;
 
-public interface IProductRepository
+namespace DAL.Interfaces;
+
+public interface IProductRepository : IGenericRepository<ProductEntity, int>
 {
-    
+    IQueryable<ProductEntity> Products { get; }
+
+    Task<IQueryable<ProductEntity>> SearchProducts(string name);
+    Task<ProductEntity> GetByName(string name);
+
 }
+
+
+

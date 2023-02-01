@@ -1,0 +1,14 @@
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\bin\Debug\net6.0\DAL.deps.json
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\bin\Debug\net6.0\DAL.runtimeconfig.json
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\bin\Debug\net6.0\DAL.dll
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\bin\Debug\net6.0\DAL.pdb
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\DAL.dll
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\refint\DAL.dll
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\DAL.pdb
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\DAL.genruntimeconfig.cache
+C:\Users\PC Admin\source\ShopAPI_ReactPV016-main\ShopApi\DAL\obj\Debug\net6.0\ref\DAL.dll

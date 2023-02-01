@@ -1,5 +1,9 @@
 using DAL;
 using DAL.Entities.Identity;
+using DAL.Interfaces;
+using DAL.Repositories;
+using Infrastructure.Interfaces;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +38,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -58,9 +65,15 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(dir),
     RequestPath="/images"
 });
-
+app.UseCors(options => options
+    .WithOrigins(new[] { "http://localhost:3000"})
+    .AllowAnyHeader()
+    .AllowCredentials()
+);
 app.MapControllers();
 
 app.SeedData();
 
 app.Run();
+
+

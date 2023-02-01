@@ -1,33 +1,79 @@
+export const baseURL = "http://localhost:5034/images/";
 export interface IAuthProvider {
     provider: string,
     token: any
 }
+export interface IUser {
+    name: string,
+    surname: string,
+    username: string,
+    email: string
+}
+export interface ILogin {
+    email: string,
+    password: string
+}
+export interface IRegister {
+    email: string | undefined
+    UserName: string | undefined
+    FirstName: string | undefined
+    LastName: string | undefined
+    password: string | undefined
+    CheckPassword: string | undefined
+}
 export interface IUserState {
-    UserName: string,
-    Email: string,
-    FirstName: string,
-    LastName: string
+    user: IUser | null,
+    loading: boolean,
+    isAuth: boolean,
+    message: ''
+}
+export interface IProduct {
+    Name: string
+    Price: number
+    Manufacturer: string
+    Description: string
+    ShortDescription: string
+    Image: string
+    Category: string
+    HTMLbody: string
 }
 export interface IProductState {
-    Name: string,
-    Price: number,
-
+    productOnPage: IProduct | null | undefined
+    products: Array<IProduct> | null
+    categories: Array<string> | null
+    message: string,
+    loading: boolean,
 }
 export enum CommonActionTypes {
-
+    START_REQUEST = "START_REQUEST",
     ERROR_MSG = "ERROR_MSG",
     SERVER_USER_ERROR = "SERVER_USER_ERROR",
 
 }
 export enum ProductActionTypes {
-
+    GET_PRODUCT_SUCCESS = "GET_PRODUCT_SUCCESS",
+    GET_PRODUCTS_SUCCESS = "GET_PRODUCTS_SUCCESS",
+    GET_CATEGORIES_SUCCESS = "GET_CATEGORIES_SUCCESS",
 
 }
 export enum UserActionTypes {
 
-    GOOGLE_LOGIN = "GOOGLE_LOGIN"
+    LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS",
+    GOOGLE_LOGIN = "GOOGLE_LOGIN",
+    REGISTER_USER = "REGISTER_USER"
 }
-
+interface LoginUserSuccessAction {
+    type: UserActionTypes.LOGIN_USER_SUCCESS
+    payload: any
+}
+interface RegisterUserSuccess {
+    type: UserActionTypes.REGISTER_USER
+    payload: any
+}
+interface StartRequest {
+    type: CommonActionTypes.START_REQUEST,
+    payload: any
+}
 interface Error_MSG {
     type: CommonActionTypes.ERROR_MSG,
     payload: any
@@ -45,10 +91,11 @@ export interface IAuthProvider {
     provider: string;
     token: any;
 }
-export type UserActions = Error_MSG
+export type CommonActions = Error_MSG
     | ServerUserErrorAction
-    | GoogleExternalLogin;
-export type ProductActions = Error_MSG
-    | ServerUserErrorAction;
+    | GoogleExternalLogin
+    | StartRequest;
+export type ProductActions = ServerUserErrorAction;
+export type UserActions = LoginUserSuccessAction | RegisterUserSuccess;
 
 

@@ -1,4 +1,5 @@
-﻿using DAL.Entities.Identity;
+﻿using DAL.Entities;
+using DAL.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ namespace DAL
         public AppEFContext(DbContextOptions<AppEFContext> options) : base(options)
         {
         }
+        public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -33,6 +36,10 @@ namespace DAL
                    .HasForeignKey(r => r.UserId)
                    .IsRequired();
             });
+            builder.Entity<CategoryEntity>()
+                .HasMany(c => c.Products)
+                .WithOne(e => e.Category);
         }
+      
     }
 }

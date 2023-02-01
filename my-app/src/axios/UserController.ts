@@ -1,5 +1,7 @@
+
 import axios from "axios";
-import { IAuthProvider } from '../types/types';
+import { IRegister, IAuthProvider } from '../types/types';
+
 
 
 const instance = axios.create({
@@ -24,18 +26,41 @@ const requests = {
 
 const Account = {
 	login: (user: any) => requests.post(`/login`, user),
+	Register: (register: IRegister) => requests.post(`/register`, register),
 	GoogleLogin: (auth: IAuthProvider) => requests.post(`/GoogleExternalLogin`, auth),
 }
 
+export async function login(user: any) {
+	const data = await Account.login(user)
+		.then((response) => {
+			return {
+				response,
+			};
+		})
+		.catch((error) => {
+			return error.response;
+		});
+	return data;
+}
+export async function Register(rg: IRegister) {
+	const data = await Account.Register(rg)
+		.then((response) => {
+			return {
+				response,
+			};
+		})
+		.catch((error) => {
+			return error.response;
+		});
+	return data;
+}
 export async function GoogleExternalLoginAsync(token: any, Provider: string) {
 
 	const data = await Account.GoogleLogin({ token: token, provider: Provider })
 		.then((response) => {
 			console.log(response);
-			return {
+			return response;
 
-				response,
-			};
 		})
 		.catch((error) => {
 			return error.response;

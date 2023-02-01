@@ -1,6 +1,10 @@
-﻿namespace Services.Interfaces;
+﻿
+using Infrastructure.Models.Caterories;
 
-public class ICategoryService
-{
-    
+namespace Infrastructure.Interfaces
+{ 
+    public interface ICategoryService
+    {
+        Task<int> Create(CategoryCreateVM model);
+    }
 }
