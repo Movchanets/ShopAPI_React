@@ -36,7 +36,7 @@ public class ProductRepository : GenericRepository<ProductEntity>, IProductRepos
 
     private ICollection<ProductEntity> FilterByName(ICollection<ProductEntity> list, string name)
     {
-        return list.Where(i => i.Name.Contains(name)).ToList();
+        return list.Where(i =>  i.Name.ToLower().Contains(name.ToLower())).ToList();
     }
 
     public ICollection<ProductEntity> GetProductsAsync(GetProductsVM model)

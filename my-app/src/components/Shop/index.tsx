@@ -16,10 +16,7 @@ import { display } from '@mui/system';
 import { toast } from 'react-toastify';
 
 
-type OptionType = {
-	value: string;
-	label: string;
-};
+
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',
 	borderRadius: theme.shape.borderRadius,
@@ -132,6 +129,7 @@ const Shop: React.FC = () => {
 		setSearch({
 			...search, Find: str
 		});
+		console.log(search.Find);
 	}
 	const setPageNum = (n: number) => {
 		setSearch({
@@ -176,7 +174,7 @@ const Shop: React.FC = () => {
 							placeholder="Search…"
 							inputProps={{ 'aria-label': 'search' }}
 						/>
-						{<Button onClick={() => { LoadProducts() }} >Search</Button>}
+
 					</Search>
 
 				</Grid>
