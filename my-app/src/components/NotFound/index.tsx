@@ -15,7 +15,7 @@ export const Error = () => {
 		>
 			<Container maxWidth="md">
 				<Grid container spacing={2}>
-					<Grid xs={6}>
+					<Grid >
 						<Typography variant="h1">
 							404
 						</Typography>
@@ -24,7 +24,7 @@ export const Error = () => {
 						</Typography>
 						<Link to="/dashboard"> <Button variant="contained"> Back Home</Button></Link>
 					</Grid>
-					<Grid xs={6}>
+					<Grid >
 						<img
 							src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg"
 							alt=""

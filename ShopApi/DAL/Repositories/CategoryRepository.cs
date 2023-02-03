@@ -11,5 +11,6 @@ namespace DAL.Repositories
         }
 
         public IQueryable<CategoryEntity> Categories => GetAll();
+        
     }
 }

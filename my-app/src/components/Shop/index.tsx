@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { alpha, Avatar, Box, Button, ButtonGroup, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Container, Grid, IconButton, InputLabel, MenuItem, Paper, SelectChangeEvent, styled, TextField, Typography } from '@mui/material';
+import { alpha, Avatar, Box, Button, ButtonGroup, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Container, Grid, IconButton, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, styled, TextField, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Select as SelectMui } from '@mui/material'
 import { red } from '@mui/material/colors';
 import { Link } from 'react-router-dom';
-
+import { v4 as uuidv4 } from 'uuid';
 import Copyright from '../Copyright';
-import { IProduct, baseURL } from '../../types/types';
+import { IProduct, ISearch, baseURL } from '../../types/types';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useActions } from '../../store/Action-Creators/useActions';
+import { string } from 'yup';
+import { display } from '@mui/system';
+import { toast } from 'react-toastify';
 
 
 type OptionType = {
@@ -57,35 +61,38 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 		},
 	},
 }));
-const ProductPreview: React.FC<any> = (product: IProduct) => {
+const ProductPreview: React.FC<any> = (product: any) => {
 
+	const src = product.name.split(' ').join('_');
 
 	return (
 		<>
-			<Card sx={{ maxWidth: '100%', margin: '5px' }}>
+			<Card sx={{ width: '18%', margin: '5px' }}>
 				<CardHeader
-					avatar={
-						<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-							{product.Manufacturer}
-						</Avatar>
-					}
 
-					title={product.Name}
-					subheader={product.Price}
+					sx={{ height: '15%' }}
+					title={product.name}
+					subheader={product.price + "₴"}
 				/>
-				<CardMedia
+				{product.image == null ? <CardMedia
 					component="img"
-					height="400"
-					image={baseURL + product.Image}
+					height="200"
+					image={'https://via.placeholder.com/150'}
 					alt="NO IMAGE"
-				/>
+				/> : <CardMedia
+					component="img"
+					height="150"
+					image={baseURL + product.image}
+					alt="NO IMAGE"
+				/>}
+
 				<CardContent>
 					<Typography variant="body2" color="text.secondary">
-						{product.ShortDescription}
+						{product.shortDescription}
 					</Typography>
 					<CardActions style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
-						<Button size="small"><Link to={`/${product.Name.split(' ').join('_')}`} >Buy</Link></Button>
+						<Button size="small"><Link to={src} >Buy</Link></Button>
 					</CardActions>
 				</CardContent>
 
@@ -96,57 +103,63 @@ const ProductPreview: React.FC<any> = (product: IProduct) => {
 }
 const Shop: React.FC = () => {
 
-	// const { tags, allPosts } = useTypedSelector((store) => store.BlogReducer)
-	// const { PostsGet } = useActions();
-	// const options: OptionType[] = tags.map(i => {
-	// 	return { value: i, label: i }
-	// });
-	// const [selectedOption, setSelectedOption] = useState<ValueType<OptionType>>();
-	const [pageSize, setpageSize] = useState(5);
-	const [FindInput, setFindInput] = useState("");
-	const [page, setPage] = useState(0);
+	const { products, categories } = useTypedSelector((store) => store.productReducer)
+	const { Products, Categories } = useActions();
 
-	// const handleChange = (option: any) => {
 
-	// 	setSelectedOption(option);
-	// 	LoadPosts()
 
-	// };
+	const [search, setSearch] = useState<ISearch>({ pageNumber: 0, pageSize: 5, Find: "", Category: "" });
+
+
+
 	const PageSizeChange = (event: any) => {
-		setpageSize(Number(event.target.value));
+		setSearch({
+			...search, pageSize: Number(event.target.value)
+		});
 
 	};
-	// const LoadPosts = () => {
-	// 	const tags = selectedOption as any[];
-	// 	const str: any[] = [];
-	// 	tags?.forEach(element => {
-	// 		str.push(element.value);
-	// 	});
+	const handleCategoryChange = (event: any) => {
+		setSearch({
+			...search, pageSize: event.target.value
+		});
+	}
+	const LoadProducts = async () => {
+		console.log(search)
+		Products(search);
 
-	// 	const getModel =
-	// 	{
-	// 		pageNumber: page,
-	// 		pageSize: pageSize,
-	// 		Tags: str,
-	// 		Find: FindInput
-	// 	};
-	// 	console.log(getModel)
-	// 	PostsGet(getModel);
-	// }
-
-	// useEffect(() => { LoadPosts() }, [, pageSize, page]);
+	}
+	const setFindInput = (str: string) => {
+		setSearch({
+			...search, Find: str
+		});
+	}
+	const setPageNum = (n: number) => {
+		setSearch({
+			...search, pageNumber: n
+		});
+	}
+	// useEffect(() => { Categories() });
+	useEffect(() => {
+		LoadProducts()
+	}, [search]);
 	return (
 
 		<Container maxWidth="lg">
 			<Grid container spacing={2}>
 				<Grid item xs={6}>
 					<Box>
-						{/* <Select
-							value={selectedOption as ValueType<OptionType>}
-							onChange={option => handleChange(option)}
-							options={options}
-							isMulti={true}
-						/> */}
+						<Select
+							value={""}
+							label="Category"
+							onChange={handleCategoryChange}
+						>
+							{categories.map((page) => (
+								<MenuItem key={page}>
+									<Typography textAlign="center">{page}</Typography>
+								</MenuItem>
+							))}
+
+						</Select>
 
 					</Box>
 				</Grid>
@@ -163,15 +176,19 @@ const Shop: React.FC = () => {
 							placeholder="Search…"
 							inputProps={{ 'aria-label': 'search' }}
 						/>
-						{/* <Button onClick={() => { LoadPosts() }} >Search</Button> */}
+						{<Button onClick={() => { LoadProducts() }} >Search</Button>}
 					</Search>
 
 				</Grid>
 			</Grid>
-			<Box sx={{ paddingBottom: '100px' }}>
-				{/* {
-					allPosts?.map((post: any) => (
-						<PostPreview props={post} key={post.uuid} />))} */}
+			<Box sx={{ paddingBottom: '100px', width: '100%', display: 'flex', flexWrap: 'wrap' }}>
+
+				{
+					products?.map((product: IProduct) => (
+
+						<ProductPreview {...product} key={uuidv4()} />
+					))}
+
 
 			</Box>
 			<ButtonGroup aria-label="medium outlined button group"
@@ -191,18 +208,18 @@ const Shop: React.FC = () => {
 
 							}}
 						>
-							<Button size="large" onClick={() => { setPage((currPage) => ++currPage) }} >+</Button>
-							<Button size="large">{page}</Button>
-							<Button size="large" disabled={page == 0 ? true : false} onClick={() => { setPage((currPage) => --currPage); }}>-</Button>
+							<Button size="large" onClick={() => { setPageNum(search.pageNumber + 1) }} >+</Button>
+							<Button size="large">{search.pageNumber}</Button>
+							<Button size="large" disabled={search.pageNumber == 0 ? true : false} onClick={() => { setPageNum(search.pageNumber - 1) }}>-</Button>
 
 
 
 
 							<TextField
 
-								value={pageSize.toString()}
+								value={search.pageNumber.toString()}
 								onChange={(e) => { PageSizeChange(e) }}
-								select // tell TextField to render select
+								select
 								style={{ width: '20%' }}
 								label="Size"
 							>

@@ -13,10 +13,21 @@ namespace DAL.Repositories
         where TEntity : class, IEntity<int>
     {
         private protected readonly AppEFContext _dbContext;
+
         public GenericRepository(AppEFContext context)
         {
             _dbContext = context;
         }
+
+
+        public async Task<TEntity> GetByName(string name)
+        {
+            return await _dbContext.Set<TEntity>()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(e => e.Name == name);
+        }
+
+        
 
         public async Task Create(TEntity entity)
         {
@@ -42,7 +53,7 @@ namespace DAL.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
-       
+
         public async Task Update(TEntity entity)
         {
             _dbContext.Set<TEntity>().Update(entity);

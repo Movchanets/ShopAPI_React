@@ -1,12 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "RIxzpJMpXHrnzw9eZm4f8khNtKG16C3+XEjYp5TLQclN3IuLHXGK9N3fXAeojYmrBq/7ps5vEJ8VxXZFSWqpvw==",
+  "dgSpecHash": "o+Yr34QMFP7c+RP3hl/Jvj7FCZtOngSKIttbPO5cKQkhok/3NgWLDIvWFLqlx+7R8UvNGHrd7VXpljmQ4QXkVw==",
   "success": true,
   "projectFilePath": "C:\\Users\\PC Admin\\source\\ShopAPI_ReactPV016-main\\ShopApi\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\PC Admin\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\PC Admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\PC Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.13\\microsoft.aspnetcore.cryptography.internal.6.0.13.nupkg.sha512",
     "C:\\Users\\PC Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.13\\microsoft.aspnetcore.cryptography.keyderivation.6.0.13.nupkg.sha512",
     "C:\\Users\\PC Admin\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.13\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.13.nupkg.sha512",
+    "C:\\Users\\PC Admin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\PC Admin\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.13\\microsoft.entityframeworkcore.6.0.13.nupkg.sha512",
     "C:\\Users\\PC Admin\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.13\\microsoft.entityframeworkcore.abstractions.6.0.13.nupkg.sha512",
     "C:\\Users\\PC Admin\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.13\\microsoft.entityframeworkcore.analyzers.6.0.13.nupkg.sha512",

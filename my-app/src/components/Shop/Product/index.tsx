@@ -10,13 +10,14 @@ import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 import { IProduct, baseURL } from '../../../types/types';
 import NotFound from '../../NotFound';
+import { useActions } from '../../../store/Action-Creators/useActions';
 
 
 
 function Product() {
 
 	let { title } = useParams();
-	//const { GetPost } = useActions();
+	const { Product } = useActions();
 	const { productOnPage } = useTypedSelector((state) => state.productReducer);
 	const [Loading, setLoading] = useState(true);
 	const useComponentWillMount = (cb: any) => {
@@ -34,8 +35,10 @@ function Product() {
 
 	useComponentWillMount(() => {
 		let str: any = title?.toString();
+
 		const fetchData = async () => {
-			//	await GetProduct(str?.split('_').join(' '));
+
+			Product(str);
 			setLoading(false);
 
 		}
@@ -46,25 +49,22 @@ function Product() {
 		return (
 			<Container>
 				<Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: "center" }}>
-
-					<Typography variant="h1" >{productOnPage.Name}</Typography>
-
+					<Typography variant="h1" >{productOnPage.name}</Typography>
 					<div>
 						<Grid container spacing={2}>
-
 							<Grid item xs={4} md={4}>
 								<Typography variant="body2" color="text.secondary">
-									author : {productOnPage.Manufacturer}
+									author : {productOnPage.manufacturer}
 								</Typography>
 							</Grid>
 							<Grid item xs={4} md={4}>
 								<Typography variant="body2" color="text.secondary">
-									{productOnPage.Price}
+									{productOnPage.price}
 								</Typography>
 							</Grid>
 							<Grid item xs={4} md={4}>
 								<Typography variant="body2" color="text.secondary">
-									{productOnPage.Category}
+									{productOnPage.category}
 								</Typography>
 							</Grid>
 
@@ -76,18 +76,18 @@ function Product() {
 				<CardMedia
 					component="img"
 					height="400"
-					image={baseURL + + productOnPage.Image}
+					image={baseURL + productOnPage.image}
 					alt="NO IMAGE"
 				/>
 				<Typography variant="body2" color="text.secondary">
-					{productOnPage.ShortDescription}
+					{productOnPage.shortDescription}
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
-					{productOnPage.Description}
+					{productOnPage.description}
 				</Typography>
-				<div>
-					{parse(productOnPage.HTMLbody)}
-				</div>
+				{/* <div>
+					{parse(productOnPage.hTMLbody)}
+				</div> */}
 			</Container >
 		)
 	}

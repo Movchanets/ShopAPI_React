@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 
-const pages = ['Login', 'Register'];
+const pages = ['Shop', 'Login', 'Register'];
 const settings = ['Dashboard'];
 
 function ResponsiveAppBar() {
@@ -56,11 +56,11 @@ function ResponsiveAppBar() {
 							textDecoration: 'none',
 						}}
 					>
-						<Link to='/Shop' key='shop' style={{ textDecoration: 'none' }}>
-							Shop</Link>
+
 					</Typography>
 
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+
 						<IconButton
 							size="large"
 							aria-label="account of current user"
@@ -89,6 +89,7 @@ function ResponsiveAppBar() {
 								display: { xs: 'block', md: 'none' },
 							}}
 						>
+
 							{pages.map((page) => (
 								<MenuItem key={page} onClick={handleCloseNavMenu}>
 									<Typography textAlign="center">{page}</Typography>

@@ -3,6 +3,12 @@ export interface IAuthProvider {
     provider: string,
     token: any
 }
+export interface ISearch {
+    pageNumber: number,
+    pageSize: number,
+    Category: string,
+    Find: string | null,
+}
 export interface IUser {
     name: string,
     surname: string,
@@ -28,20 +34,20 @@ export interface IUserState {
     message: ''
 }
 export interface IProduct {
-    Name: string
-    Price: number
-    Manufacturer: string
-    Description: string
-    ShortDescription: string
-    Image: string
-    Category: string
-    HTMLbody: string
+    name: string
+    price: number
+    manufacturer: string
+    description: string
+    shortDescription: string
+    image: string
+    category: string
+    hTMLbody: string
 }
 export interface IProductState {
-    productOnPage: IProduct | null | undefined
-    products: Array<IProduct> | null
-    categories: Array<string> | null
-    message: string,
+    productOnPage: IProduct | null
+    products: Array<IProduct>
+    categories: Array<string>
+    message: string | null,
     loading: boolean,
 }
 export enum CommonActionTypes {
@@ -54,6 +60,24 @@ export enum ProductActionTypes {
     GET_PRODUCT_SUCCESS = "GET_PRODUCT_SUCCESS",
     GET_PRODUCTS_SUCCESS = "GET_PRODUCTS_SUCCESS",
     GET_CATEGORIES_SUCCESS = "GET_CATEGORIES_SUCCESS",
+
+}
+interface GetProductActionSuccess {
+    type: ProductActionTypes.GET_PRODUCT_SUCCESS,
+    message: any,
+    product: any
+
+}
+interface GetProductsActionSuccess {
+    type: ProductActionTypes.GET_PRODUCTS_SUCCESS,
+    message: any,
+    products: IProduct[]
+
+}
+interface GetCategoriesActionSuccess {
+    type: ProductActionTypes.GET_CATEGORIES_SUCCESS,
+    message: any,
+    categories: []
 
 }
 export enum UserActionTypes {
@@ -94,8 +118,12 @@ export interface IAuthProvider {
 export type CommonActions = Error_MSG
     | ServerUserErrorAction
     | GoogleExternalLogin
-    | StartRequest;
-export type ProductActions = ServerUserErrorAction;
+    | StartRequest
+    | ServerUserErrorAction
+export type ProductActions = GetProductActionSuccess
+    | GetCategoriesActionSuccess
+    | GetProductsActionSuccess
+    | GetProductActionSuccess;
 export type UserActions = LoginUserSuccessAction | RegisterUserSuccess;
 
 

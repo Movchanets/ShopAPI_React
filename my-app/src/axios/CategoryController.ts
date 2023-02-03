@@ -1,8 +1,8 @@
-import { ISearch, baseURL } from './../types/types';
+import { baseURL } from './../types/types';
 import axios from "axios";
 
 const instance = axios.create({
-	baseURL: "http://localhost:5034/api/Products",
+	baseURL: "http://localhost:5034/api/Categories",
 	//baseURL: "http://20.163.234.208:4444/api/User",
 	headers: {
 		"Content-Type": "application/json",
@@ -21,28 +21,14 @@ const requests = {
 	del: (url: string) => instance.delete(url).then().then(responseBody),
 };
 
-const Products = {
-	getProducts: (getModel: any) => requests.post(`/GetProducts`, getModel),
+const Categories = {
 
-	GetProduct: (name: string) => requests.get(`/GetProduct/?title=${name}`),
-}
-export async function ProductGet(title: string) {
-
-	const data = await Products.GetProduct(title)
-		.then((response) => {
-			return {
-				response,
-			};
-		})
-		.catch((error) => {
-			return error.response;
-		});
-	return data;
+	getCategories: () => requests.get(`/GetAll`),
 }
 
-export async function GetProducts(getModel: ISearch) {
+export async function CategoriesGet() {
 
-	const data = await Products.getProducts(getModel)
+	const data = await Categories.getCategories()
 		.then((response) => {
 			return {
 				response,

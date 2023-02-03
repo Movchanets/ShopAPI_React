@@ -14,23 +14,24 @@ namespace ShopApi.Controllers
         {
             _productService = productService;
         }
-        [HttpPost("GetPosts")]
+        [HttpPost("GetProducts")]
        
         public async Task<IActionResult> GetProductsAsync([FromBody] GetProductsVM model)
         {
-            var res = await _productService.GetProductsAsync(model);
+            var res = await _productService.GetProductsAsync(model); 
             if (res.IsSuccess)
             {
                 return Ok(res);
             }
 
-            return BadRequest(res);
+            return BadRequest();
         }
-        [HttpGet("GetPost")]
+        [HttpGet("GetProduct")]
        
-        public async Task<IActionResult> GetPostAsync( string name)
+        public async Task<IActionResult> GetProductAsync(string title)
         {
-            var res = await _productService.get(name);
+            string p = string.Join(" ", title.Split('_'));
+            var res = await _productService.GetProductAsync(p);
             if (res.IsSuccess)
             {
                 return Ok(res);

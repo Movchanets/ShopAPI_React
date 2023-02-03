@@ -3,6 +3,7 @@ using DAL.Entities.Identity;
 using DAL.Interfaces;
 using DAL.Repositories;
 using Infrastructure.Interfaces;
+using Infrastructure.Models.Mappers;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -39,12 +40,14 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+AutoMapperConfiguration.Config(builder.Services);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

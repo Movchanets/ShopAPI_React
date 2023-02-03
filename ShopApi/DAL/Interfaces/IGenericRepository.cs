@@ -12,6 +12,7 @@ namespace DAL.Interfaces
         IQueryable<TEntity> GetAll();
 
         Task<TEntity> GetById(T id);
+        Task<TEntity> GetByName(string name);
 
         Task Create(TEntity entity);
 
